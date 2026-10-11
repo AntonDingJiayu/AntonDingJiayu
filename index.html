@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>纪念九三阅兵 - 铭记历史 珍爱和平</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "Microsoft YaHei", "SimHei", sans-serif;
+            background: linear-gradient(135deg, #1a0000 0%, #330000 50%, #1a0000 100%);
+            color: #fff;
+            min-height: 100vh;
+        }
+
+        /* 头部标题区域 */
+        .header {
+            text-align: center;
+            padding: 40px 20px;
+            background: linear-gradient(180deg, rgba(204,0,0,0.3) 0%, transparent 100%);
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            color: #FFD700;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            font-size: 1.2em;
+            color: #ffcccc;
+            letter-spacing: 3px;
+        }
+
+        /* 国旗区域 */
+        .flag-section {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 40px 20px;
+            flex-direction: column;
+        }
+
+        .flag-container {
+            position: relative;
+            width: 450px;
+            height: 300px;
+            background: #DE2910;
+            border: 3px solid #FFD700;
+            box-shadow: 0 10px 40px rgba(222, 41, 16, 0.4);
+            overflow: hidden;
+        }
+
+        /* 用CSS绘制五星红旗 */
+        .star {
+            position: absolute;
+            color: #FFDE00;
+            font-size: 0;
+            line-height: 0;
+        }
+
+        .star::before {
+            content: "★";
+            font-size: inherit;
+            line-height: inherit;
+        }
+
+        .star-big {
+            top: 50px;
+            left: 50px;
+            font-size: 60px;
+        }
+
+        .star-small-1 {
+            top: 25px;
+            left: 130px;
+            font-size: 20px;
+        }
+
+        .star-small-2 {
+            top: 50px;
+            left: 150px;
+            font-size: 20px;
+        }
+
+        .star-small-3 {
+            top: 80px;
+            left: 150px;
+            font-size: 20px;
+        }
+
+        .star-small-4 {
+            top: 105px;
+            left: 130px;
+            font-size: 20px;
+        }
+
+        /* SVG国旗 */
+        .flag-svg {
+            width: 450px;
+            height: 300px;
+            border: 3px solid #FFD700;
+            box-shadow: 0 10px 40px rgba(222, 41, 16, 0.4);
+        }
+
+        .flag-caption {
+            margin-top: 20px;
+            font-size: 1.3em;
+            color: #FFD700;
+            letter-spacing: 5px;
+        }
+
+        /* 分隔线 */
+        .divider {
+            width: 80%;
+            max-width: 800px;
+            margin: 30px auto;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #FFD700, transparent);
+        }
+
+        /* 阅兵图片区域 */
+        .parade-section {
+            padding: 40px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .parade-section h2 {
+            text-align: center;
+            font-size: 2em;
+            color: #FFD700;
+            margin-bottom: 30px;
+            letter-spacing: 3px;
+        }
+
+        .parade-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 25px;
+            padding: 10px;
+        }
+
+        .parade-card {
+            background: rgba(139, 0, 0, 0.3);
+            border: 1px solid rgba(255, 215, 0, 0.3);
+            border-radius: 10px;
+            overflow: hidden;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .parade-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(255, 215, 0, 0.2);
+        }
+
+        .parade-card img {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .parade-card .card-info {
+            padding: 15px;
+        }
+
+        .parade-card .card-info h3 {
+            color: #FFD700;
+            font-size: 1.1em;
+            margin-bottom: 8px;
+        }
+
+        .parade-card .card-info p {
+            color: #ffcccc;
+            font-size: 0.9em;
+            line-height: 1.6;
+        }
+
+        /* 图片占位符样式 */
+        .img-placeholder {
+            width: 100%;
+            height: 220px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2em;
+            color: #FFD700;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .img-placeholder.bg1 { background: linear-gradient(135deg, #2d0000, #5c0000); }
+        .img-placeholder.bg2 { background: linear-gradient(135deg, #001a33, #003366); }
+        .img-placeholder.bg3 { background: linear-gradient(135deg, #1a3300, #336600); }
+        .img-placeholder.bg4 { background: linear-gradient(135deg, #330019, #660033); }
+        .img-placeholder.bg5 { background: linear-gradient(135deg, #0d0d2b, #1a1a4d); }
+        .img-placeholder.bg6 { background: linear-gradient(135deg, #2b1a00, #4d3300); }
+
+        /* 底部信息 */
+        .footer {
+            text-align: center;
+            padding: 40px 20px;
+            border-top: 1px solid rgba(255, 215, 0, 0.2);
+            margin-top: 40px;
+        }
+
+        .footer p {
+            color: #ff9999;
+            font-size: 1.1em;
+            line-height: 2;
+            letter-spacing: 2px;
+        }
+
+        .footer .quote {
+            font-size: 1.4em;
+            color: #FFD700;
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+
+        /* 响应式 */
+        @media (max-width: 768px) {
+            .header h1 { font-size: 1.8em; }
+            .flag-svg, .flag-container { width: 300px; height: 200px; }
+            .parade-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 头部 -->
+    <div class="header">
+        <h1>🇨🇳 纪念九三阅兵</h1>
+        <p>铭记历史 · 缅怀先烈 · 珍爱和平 · 开创未来</p>
+    </div>
+
+    <!-- 国旗展示 -->
+    <div class="flag-section">
+        <svg class="flag-svg" viewBox="0 0 900 600" xmlns="http://www.w3.org/2000/svg">
+            <!-- 红色旗面 -->
+            <rect width="900" height="600" fill="#DE2910"/>
+            <!-- 大五角星 -->
+            <polygon points="150,100 176,180 260,180 192,230 218,310 150,260 82,310 108,230 40,180 124,180"
+                     fill="#FFDE00"/>
+            <!-- 小五角星1 -->
+            <polygon points="300,50 310,80 340,80 316,100 326,130 300,110 274,130 284,100 260,80 290,80"
+                     fill="#FFDE00"/>
+            <!-- 小五角星2 -->
+            <polygon points="360,120 370,150 400,150 376,170 386,200 360,180 334,200 344,170 320,150 350,150"
+                     fill="#FFDE00"/>
+            <!-- 小五角星3 -->
+            <polygon points="360,240 370,270 400,270 376,290 386,320 360,300 334,320 344,290 320,270 350,270"
+                     fill="#FFDE00"/>
+            <!-- 小五角星4 -->
+            <polygon points="300,310 310,340 340,340 316,360 326,390 300,370 274,390 284,360 260,340 290,340"
+                     fill="#FFDE00"/>
+        </svg>
+        <p class="flag-caption">五星红旗 — 中华人民共和国国旗</p>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- 阅兵图片展示 -->
+    <div class="parade-section">
+        <h2>🎖️ 2015年九三阅兵精彩瞬间</h2>
+
+        <div class="parade-grid">
+            <!-- 卡片1 -->
+            <div class="parade-card">
+                <div class="img-placeholder bg1">
+                    🎖️<br>三军仪仗队<br>英姿飒爽
+                </div>
+                <div class="card-info">
+                    <h3>三军仪仗队</h3>
+                    <p>陆海空三军仪仗队以整齐划一的步伐通过天安门广场，展现中国军人的威武与庄严。</p>
+                </div>
+            </div>
+
+            <!-- 卡片2 -->
+            <div class="parade-card">
+                <div class="img-placeholder bg2">
+                    ✈️<br>空中梯队<br>翱翔蓝天
+                </div>
+                <div class="card-info">
+                    <h3>空中梯队</h3>
+                    <p>20多种型号飞机近200架组成10个空中梯队，包括预警指挥机、轰炸机、歼击机等，展示中国空军实力。</p>
+                </div>
+            </div>
+
+            <!-- 卡片3 -->
+            <div class="parade-card">
+                <div class="img-placeholder bg3">
+                    🛡️<br>抗战老兵<br>致敬英雄
+                </div>
+                <div class="card-info">
+                    <h3>抗战老兵方队</h3>
+                    <p>平均年龄90岁的抗战老兵乘车方队通过天安门，向为民族独立浴血奋战的英雄们致敬。</p>
+                </div>
+            </div>
+
+            <!-- 卡片4 -->
+            <div class="parade-card">
+                <div class="img-placeholder bg4">
+                    🚀<br>导弹方队<br>大国重器
+                </div>
+                <div class="card-info">
+                    <h3>装备方队</h3>
+                    <p>27个装备方队展示国产现役主战装备，84%为首次亮相，包括99A式坦克、东风系列导弹等大国重器。</p>
+                </div>
+            </div>
+
+            <!-- 卡片5 -->
+            <div class="parade-card">
+                <div class="img-placeholder bg5">
+                    🌍<br>外军方队<br>共卫和平
+                </div>
+                <div class="card-info">
+                    <h3>外军代表队</h3>
+                    <p>来自俄罗斯、巴基斯坦、古巴、埃及等17个国家的军队代表方队参阅，彰显共同维护和平的决心。</p>
+                </div>
+            </div>
+
+            <!-- 卡片6 -->
+            <div class="parade-card">
+                <div class="img-placeholder bg6">
+                    🕊️<br>和平鸽放飞<br>珍爱和平
+                </div>
+                <div class="card-info">
+                    <h3>放飞和平鸽</h3>
+                    <p>阅兵式最后，数万只和平鸽在天安门广场上空飞翔，象征中国人民珍爱和平、捍卫和平的坚定信念。</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- 底部 -->
+    <div class="footer">
+        <p class="quote">"铭记历史、缅怀先烈、珍爱和平、开创未来"</p>
+        <p>2015年9月3日 · 北京天安门广场</p>
+        <p>纪念中国人民抗日战争暨世界反法西斯战争胜利70周年</p>
+    </div>
+
+</body>
+</html>
